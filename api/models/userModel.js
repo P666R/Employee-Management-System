@@ -9,13 +9,6 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
-    email: {
-      type: String,
-      lowercase: true,
-      unique: true,
-      required: true,
-      validate: [validator.isEmail, 'Please provide a valid email'],
-    },
     username: {
       type: String,
       required: true,
@@ -28,24 +21,6 @@ const userSchema = new Schema(
         message:
           'Username must be alphanumeric, without special characters.Hypens and underscores are allowed.',
       },
-    },
-    firstName: {
-      type: String,
-      required: true,
-      trim: true,
-      validate: [
-        validator.isAlphanumeric,
-        'First Name can only have Alphanumeric values. No special characters allowed',
-      ],
-    },
-    lastName: {
-      type: String,
-      required: true,
-      trim: true,
-      validate: [
-        validator.isAlphanumeric,
-        'Last Name can only have Alphanumeric values. No special characters allowed',
-      ],
     },
     password: {
       type: String,
@@ -64,28 +39,10 @@ const userSchema = new Schema(
         message: 'Passwords do not match',
       },
     },
-    isEmailVerified: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    provider: {
-      type: String,
-      required: true,
-      default: 'email',
-    },
-    googleID: String,
-    avatar: String,
-    passwordChangedAt: Date,
     roles: {
       type: [String],
       default: [USER],
     },
-    active: {
-      type: Boolean,
-      default: true,
-    },
-    refreshToken: [String],
   },
   {
     timestamps: true,
@@ -107,15 +64,6 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 
   this.passwordConfirm = undefined;
-  next();
-});
-
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password') || this.isNew) {
-    return next();
-  }
-
-  this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
