@@ -2,10 +2,10 @@
   "name": "employee-management-system",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon api/index.js",
-    "start": "node api/index.js"
+    "dev": "nodemon api/server.js",
+    "start": "node api/server.js"
   },
   "keywords": [],
   "author": "PRoy",
@@ -13,11 +13,19 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "chalk": "^5.3.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.3.4"
+    "mongoose": "^8.3.4",
+    "morgan": "^1.10.0",
+    "validator": "^13.11.0",
+    "winston": "^3.13.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
