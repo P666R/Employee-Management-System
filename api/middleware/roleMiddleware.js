@@ -12,14 +12,18 @@ const checkRole =
       res.status(401);
       throw new Error('You are not authorized to use our platform');
     }
+
     const rolesArray = [...allowedRoles];
+
     const roleFound = req.roles
       .map((role) => rolesArray.includes(role))
       .find((value) => value === true);
+
     if (!roleFound) {
       res.status(401);
       throw new Error('You are not authorized to perform this request');
     }
+
     next();
   };
 
