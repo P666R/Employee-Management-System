@@ -9,6 +9,7 @@ import connectionToDB from './config/connectDB.js';
 import { morganMiddleware, systemLogs } from './utils/logger.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
+import employeeRoutes from './routes/employeeRoutes.js';
 
 await connectionToDB();
 
@@ -25,6 +26,7 @@ app.use(mongoSanitize());
 app.use(morganMiddleware);
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/employee', employeeRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
