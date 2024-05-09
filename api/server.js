@@ -7,6 +7,7 @@ import mongoSanitize from 'express-mongo-sanitize';
 
 import connectionToDB from './config/connectDB.js';
 import { morganMiddleware, systemLogs } from './utils/logger.js';
+import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
 await connectionToDB();
 
@@ -20,15 +21,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(mongoSanitize());
-
 app.use(morganMiddleware);
 
-app.get('/', (req, res) => {
+app.get('/api/v1/test', (req, res) => {
   res.json({ hi: 'Hello World!' });
 });
 
-const PORT = process.env.PORT || 4000;
+app.use(notFound);
+app.use(errorHandler);
 
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(
     `${chalk.green.bold('✔')} 👍 Server running in ${chalk.yellow.bold(process.env.NODE_ENV)} mode on port ${chalk.blue.bold(PORT)}`,
