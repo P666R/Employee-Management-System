@@ -28,7 +28,8 @@ const getAllEmployees = asyncHandler(async (req, res) => {
   const employees = await Employee.find(filters)
     .sort(sortOptions)
     .skip(skip)
-    .limit(limit);
+    .limit(limit)
+    .lean();
 
   res.status(200).json({
     success: true,
