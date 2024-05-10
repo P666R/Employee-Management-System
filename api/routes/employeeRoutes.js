@@ -1,12 +1,11 @@
 import express from 'express';
+
 import checkAuth from '../middleware/checkAuthMiddleware.js';
-import {
-  createEmployee,
-  getAllEmployees,
-  getEmployee,
-  updateEmployee,
-  deleteEmployee,
-} from '../controllers/employee/employeeController.js';
+import getAllEmployees from '../controllers/employee/getAllEmployees.js';
+import getEmployee from '../controllers/employee/getEmployee.js';
+import createEmployee from '../controllers/employee/createEmployee.js';
+import updateEmployee from '../controllers/employee/updateEmployee.js';
+import deleteEmployee from '../controllers/employee/deleteEmployee.js';
 import role from '../middleware/roleMiddleware.js';
 import {
   getEmployeeValidations,
