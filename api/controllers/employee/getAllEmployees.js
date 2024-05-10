@@ -1,10 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Employee from '../../models/employeeModel.js';
-import validateQueryParams from '../../middleware/validateQueryParamsMiddleware.js';
 
 const getAllEmployees = asyncHandler(async (req, res) => {
-  validateQueryParams(req, res);
-
   const { search, page = 1, limit = 5, sortBy } = req.query;
 
   const filters = {};

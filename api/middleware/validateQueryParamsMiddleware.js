@@ -2,7 +2,7 @@ import { validationResult } from 'express-validator';
 
 const allowedParams = ['search', 'page', 'limit', 'sortBy'];
 
-const validateQueryParams = (req, res) => {
+const validateQueryParams = (req, res, next) => {
   const unexpectedParams = Object.keys(req.query).filter(
     (param) => !allowedParams.includes(param),
   );
@@ -24,6 +24,8 @@ const validateQueryParams = (req, res) => {
         .join(', ')}`,
     );
   }
+
+  next();
 };
 
 export default validateQueryParams;

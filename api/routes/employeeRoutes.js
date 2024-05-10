@@ -13,6 +13,7 @@ import {
   deleteEmployeeValidations,
   getAllEmployeesValidations,
 } from '../middleware/employeeValidations.js';
+import validateQueryParams from '../middleware/validateQueryParamsMiddleware.js';
 
 const router = express.Router();
 
@@ -20,13 +21,13 @@ router.use(checkAuth, role.checkRole(role.ROLES.Admin));
 
 router
   .route('/')
-  .get(getAllEmployeesValidations, getAllEmployees)
+  .get(getAllEmployeesValidations, validateQueryParams, getAllEmployees)
   .post(createEmployee);
 
 router
   .route('/:id')
-  .get(getEmployeeValidations, getEmployee)
-  .patch(updateEmployeeValidations, updateEmployee)
-  .delete(deleteEmployeeValidations, deleteEmployee);
+  .get(getEmployeeValidations, validateQueryParams, getEmployee)
+  .patch(updateEmployeeValidations, validateQueryParams, updateEmployee)
+  .delete(deleteEmployeeValidations, validateQueryParams, deleteEmployee);
 
 export default router;

@@ -1,10 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Employee from '../../models/employeeModel.js';
-import validateQueryParams from '../../middleware/validateQueryParamsMiddleware.js';
 
 const deleteEmployee = asyncHandler(async (req, res) => {
-  validateQueryParams(req, res);
-
   const employee = await Employee.findById(req.params.id);
 
   if (!employee) {

@@ -1,10 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Employee from '../../models/employeeModel.js';
-import validateQueryParams from '../../middleware/validateQueryParamsMiddleware.js';
 
 const updateEmployee = asyncHandler(async (req, res) => {
-  validateQueryParams(req, res);
-
   const { id } = req.params;
   const { name, email, mobile, designation, gender, course, image } = req.body;
 
