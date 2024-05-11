@@ -43,6 +43,8 @@ const updateEmployee = asyncHandler(async (req, res) => {
       success: true,
       employee: updatedEmployee,
     });
+
+    return;
   }
 
   res.status(200).json({

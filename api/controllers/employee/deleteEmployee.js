@@ -2,7 +2,9 @@ import asyncHandler from 'express-async-handler';
 import Employee from '../../models/employeeModel.js';
 
 const deleteEmployee = asyncHandler(async (req, res) => {
-  const employee = await Employee.findById(req.params.id);
+  const { id } = req.params;
+
+  const employee = await Employee.findById(id);
 
   if (!employee) {
     res.status(404);
