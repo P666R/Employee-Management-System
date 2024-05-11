@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator';
 
-const allowedParams = ['search', 'page', 'limit', 'sortBy'];
+const allowedParams = ['search', 'page', 'limit', 'sortBy', 'searchType'];
 
 const validateQueryParams = (req, res, next) => {
   const unexpectedParams = Object.keys(req.query).filter(

@@ -2,15 +2,11 @@ import asyncHandler from 'express-async-handler';
 import Employee from '../../models/employeeModel.js';
 
 const getAllEmployees = asyncHandler(async (req, res) => {
-  const { search, page = 1, limit = 5, sortBy } = req.query;
+  const { search, page = 1, limit = 5, sortBy, searchType } = req.query;
 
   const filters = {};
-  if (search) {
-    filters.$or = [
-      { name: { $regex: search, $options: 'i' } },
-      { email: { $regex: search, $options: 'i' } },
-      { mobile: { $regex: search, $options: 'i' } },
-    ];
+  if (search && searchType) {
+    filters[searchType] = { $regex: search, $options: 'i' };
   }
 
   let sortOptions = {};

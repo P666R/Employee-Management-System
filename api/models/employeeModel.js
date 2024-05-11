@@ -71,6 +71,8 @@ const employeeSchema = new Schema(
   },
 );
 
+employeeSchema.index({ name: 1 }, { mobile: 1 });
+
 employeeSchema.pre('save', function (next) {
   const formattedName = this.name
     .trim()

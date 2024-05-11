@@ -21,13 +21,13 @@ router.use(checkAuth, role.checkRole(role.ROLES.Admin));
 
 router
   .route('/')
-  .get(getAllEmployeesValidations, validateQueryParams, getAllEmployees)
+  .get(getAllEmployeesValidations(), validateQueryParams, getAllEmployees)
   .post(createEmployee);
 
 router
   .route('/:id')
-  .get(getEmployeeValidations, validateQueryParams, getEmployee)
-  .patch(updateEmployeeValidations, validateQueryParams, updateEmployee)
-  .delete(deleteEmployeeValidations, validateQueryParams, deleteEmployee);
+  .get(getEmployeeValidations(), validateQueryParams, getEmployee)
+  .patch(updateEmployeeValidations(), validateQueryParams, updateEmployee)
+  .delete(deleteEmployeeValidations(), validateQueryParams, deleteEmployee);
 
 export default router;
