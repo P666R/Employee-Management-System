@@ -85,6 +85,23 @@ employeeSchema.pre('save', function (next) {
   next();
 });
 
+employeeSchema.pre('findOneAndUpdate', function (next) {
+  const update = this.getUpdate();
+
+  if (update?.$set && update?.$set?.name) {
+    const formattedName = update.$set.name
+      .trim()
+      .replace(/\s+/g, ' ')
+      .split(' ')
+      .map((name) => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase())
+      .join(' ');
+
+    update.$set.name = formattedName;
+  }
+
+  next();
+});
+
 const Employee = mongoose.model('Employee', employeeSchema);
 
 export default Employee;
